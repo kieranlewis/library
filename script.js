@@ -18,7 +18,15 @@ Book.prototype.info = function() {
 }
 
 function addBookToLibrary() {
+    let title = prompt('Enter a title');
+    let author = prompt('Enter the author');
+    let pages = prompt('Enter the number of pages');
+    let read = prompt('Have you read the book before, y/n');
 
+    read = read == 'y' ?  true : false;  
+
+    let newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
 }
 
 let bookA = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
