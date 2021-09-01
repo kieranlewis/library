@@ -17,4 +17,11 @@ Book.prototype.info = function() {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${readString}`;
 }
 
-let bookA = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
+function addBookToLibrary() {
+
+}
+
+let bookA = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
+let bookB = new Book('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', 352, true);
+let bookC = new Book('Pride & Prejudice', 'Jane Austen', 384, false);
+myLibrary.push(bookA, bookB, bookC);
