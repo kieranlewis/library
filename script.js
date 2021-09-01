@@ -1,5 +1,5 @@
 let myLibrary = [];
-const booksList = document.querySelector('.books');
+//const booksList = document.querySelector('.books');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -15,7 +15,7 @@ Book.prototype.info = function() {
     } else {
         readString = 'not read yet';
     }
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${readString}`;
+    return [this.title, this.author, this.pages, readString];
 }
 
 function addBookToLibrary() {
@@ -30,15 +30,25 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
 }
 
+const table = document.querySelector('.books');
 function displayBooks() {
     let book;
-    //loops through all books in myLibrary
     for(let i = 0; i < myLibrary.length; i++) {
-        book = myLibrary[i];
-        const li = document.createElement('li');
-        li.textContent = book.info();
+        //create a row for each book
+        const tr = document.createElement('tr');
+        table.appendChild(tr);
         
-        booksList.appendChild(li);
+        book = myLibrary[i];
+        const bookInfo = book.info();
+
+        //split book info into 4 table cells
+        for(let j = 0; j < bookInfo.length; j++) {
+            const td = document.createElement('td');
+            td.textContent = bookInfo[j];
+        
+            tr.appendChild(td);
+        }
+        
     }
 }
 
