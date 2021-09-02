@@ -18,18 +18,6 @@ Book.prototype.info = function() {
     return [this.title, this.author, this.pages, readString];
 }
 
-function addBookToLibrary() {
-    let title = prompt('Enter a title');
-    let author = prompt('Enter the author');
-    let pages = prompt('Enter the number of pages');
-    let read = prompt('Have you read the book before, y/n');
-
-    read = read == 'y' ?  true : false;  
-
-    let newBook = new Book(title, author, pages, read);
-    myLibrary.push(newBook);
-}
-
 function populateTable(books = [], table) {
     while(table.rows.length > 1) {
         table.deleteRow(1);
@@ -41,11 +29,13 @@ function populateTable(books = [], table) {
         let author = row.insertCell(1);
         let pages = row.insertCell(2);
         let read = row.insertCell(3);
+        let removeBook = row.insertCell(4);
 
         title.innerHTML = book.title;
         author.innerHTML = book.author;
         pages.innerHTML = book.pages;
         read.innerHTML = book.read;
+        removeBook.innerHTML = `<button [data-index]="${i}">Remove Book</button>`;
     })
 }
 
