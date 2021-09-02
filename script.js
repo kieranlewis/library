@@ -36,6 +36,13 @@ function populateTable(books = [], table) {
         pages.innerHTML = book.pages;
         read.innerHTML = book.read;
         removeBook.innerHTML = `<button [data-index]="${i}">Remove Book</button>`;
+
+        removeBook.addEventListener('click', (e) => {
+            let index = e.target.getAttribute('[data-index]');
+            console.log(index);
+            myLibrary.splice(index, 1);
+            populateTable(myLibrary, table);
+        });
     })
 }
 
@@ -55,6 +62,9 @@ function addBook(e) {
 //Add book
 const addForm = document.forms['addBookForm'];
 addForm.addEventListener('submit', addBook);
+
+const removeBookButtons = document.querySelectorAll('[data-index]');
+console.log(removeBookButtons);
 
 //dummy list of books
 let bookA = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
