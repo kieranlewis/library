@@ -1,5 +1,5 @@
 let myLibrary = [];
-//const booksList = document.querySelector('.books');
+const table = document.querySelector('.books');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -11,9 +11,9 @@ function Book(title, author, pages, read) {
 Book.prototype.info = function() {
     let readString;
     if(this.read) {
-        readString = 'has been read';
+        readString = 'read';
     } else {
-        readString = 'not read yet';
+        readString = 'not read';
     }
     return [this.title, this.author, this.pages, readString];
 }
@@ -30,14 +30,13 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
 }
 
-const table = document.querySelector('.books');
 function displayBooks() {
     let book;
     for(let i = 0; i < myLibrary.length; i++) {
         //create a row for each book
         const tr = document.createElement('tr');
         table.appendChild(tr);
-        
+
         book = myLibrary[i];
         const bookInfo = book.info();
 
@@ -51,6 +50,23 @@ function displayBooks() {
         
     }
 }
+
+function addBook(e) {
+    e.preventDefault();
+    console.log(document.forms["addBookForm"]);
+    const title = addForm.querySelector('#title').value;
+    const author = addForm.querySelector('#author').value;
+    const pages = addForm.querySelector('#pages').value;
+    const read = addForm.querySelector('#read').value;
+
+    const book = new Book(title, author, pages, read);
+    //populateTable(books, myLibrary);
+    myLibrary.push(book);
+}
+
+//Add book
+const addForm = document.forms['addBookForm'];
+addForm.addEventListener('submit', addBook);
 
 //dummy list of books
 let bookA = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
