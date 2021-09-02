@@ -30,25 +30,23 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
 }
 
-function displayBooks() {
-    let book;
-    for(let i = 0; i < myLibrary.length; i++) {
-        //create a row for each book
-        const tr = document.createElement('tr');
-        table.appendChild(tr);
-
-        book = myLibrary[i];
-        const bookInfo = book.info();
-
-        //split book info into 4 table cells
-        for(let j = 0; j < bookInfo.length; j++) {
-            const td = document.createElement('td');
-            td.textContent = bookInfo[j];
-        
-            tr.appendChild(td);
-        }
-        
+function populateTable(books = [], table) {
+    while(table.rows.length > 1) {
+        table.deleteRow(1);
     }
+
+    books.map((book, i) => {
+        let row = table.insertRow(i+1);
+        let title = row.insertCell(0);
+        let author = row.insertCell(1);
+        let pages = row.insertCell(2);
+        let read = row.insertCell(3);
+
+        title.innerHTML = book.title;
+        author.innerHTML = book.author;
+        pages.innerHTML = book.pages;
+        read.innerHTML = book.read;
+    })
 }
 
 function addBook(e) {
@@ -58,10 +56,10 @@ function addBook(e) {
     const author = addForm.querySelector('#author').value;
     const pages = addForm.querySelector('#pages').value;
     const read = addForm.querySelector('#read').value;
-
     const book = new Book(title, author, pages, read);
-    //populateTable(books, myLibrary);
+    
     myLibrary.push(book);
+    populateTable(myLibrary, table);
 }
 
 //Add book
@@ -73,4 +71,4 @@ let bookA = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
 let bookB = new Book('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', 352, true);
 let bookC = new Book('Pride & Prejudice', 'Jane Austen', 384, false);
 myLibrary.push(bookA, bookB, bookC);
-displayBooks();
+populateTable(myLibrary ,table);
