@@ -44,7 +44,7 @@ function populateTable(books = [], table) {
         pages.innerHTML = book.pages;
         read.innerHTML = `<button>${book.info()[3]}</button>`;
         removeBook.innerHTML = `<button [data-index]="${i}">Remove Book</button>`;
-
+        
         removeBook.addEventListener('click', (e) => {
             let index = e.target.getAttribute('[data-index]');
             console.log(index);
@@ -56,7 +56,6 @@ function populateTable(books = [], table) {
     })
 }
 
-
 function addBook(e) {
     e.preventDefault();
     console.log(document.forms["addBookForm"]);
@@ -64,6 +63,7 @@ function addBook(e) {
     const author = addForm.querySelector('#author').value;
     const pages = addForm.querySelector('#pages').value;
     const read = addForm.querySelector('#read').value;
+
     const book = new Book(title, author, pages, read);
     
     myLibrary.push(book);
