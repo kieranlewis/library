@@ -62,13 +62,25 @@ function addBook(e) {
     const title = addForm.querySelector('#title').value;
     const author = addForm.querySelector('#author').value;
     const pages = addForm.querySelector('#pages').value;
-    const read = addForm.querySelector('#read').value;
-
+    //const read = addForm.querySelector('name="read"').value;
+    const read = checkRadioSelected();
+    
     const book = new Book(title, author, pages, read);
     
     myLibrary.push(book);
     populateTable(myLibrary, table);
     addForm.reset();
+}
+
+function checkRadioSelected() {
+    const read = addForm.querySelector('#radio-read');
+    const notRead = addForm.querySelector('#radio-not-read');
+
+    if(read.checked) {
+        return true
+    } else if(notRead.checked) {
+        return false;
+    }
 }
 
 //Add book
