@@ -1,4 +1,4 @@
-let myLibrary = [];
+let myLibrary = JSON.parse(localStorage.getItem('books')) || [];
 const table = document.querySelector('.books');
 const addForm = document.forms['addBookForm'];
 
@@ -42,12 +42,11 @@ function populateTable(books = [], table) {
         title.innerHTML = book.title;
         author.innerHTML = book.author;
         pages.innerHTML = book.pages;
-        read.innerHTML = `<button>${book.info()[3]}</button>`;
+        read.innerHTML = `<button>${book.read}</button>`
         removeBook.innerHTML = `<button [data-index]="${i}">Remove Book</button>`;
         
         removeBook.addEventListener('click', (e) => {
             let index = e.target.getAttribute('[data-index]');
-            console.log(index);
             myLibrary.splice(index, 1);
             populateTable(myLibrary, table);
         });
@@ -64,11 +63,12 @@ function addBook(e) {
     const pages = addForm.querySelector('#pages').value;
     //const read = addForm.querySelector('name="read"').value;
     const read = checkRadioSelected();
-    
+
     const book = new Book(title, author, pages, read);
     
     myLibrary.push(book);
     populateTable(myLibrary, table);
+    localStorage.setItem('books', JSON.stringify(myLibrary));
     addForm.reset();
 }
 
@@ -87,8 +87,9 @@ function checkRadioSelected() {
 addForm.addEventListener('submit', addBook);
 
 //dummy list of books
+/*
 let bookA = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
 let bookB = new Book('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', 352, true);
 let bookC = new Book('Pride & Prejudice', 'Jane Austen', 384, false);
-myLibrary.push(bookA, bookB, bookC);
+myLibrary.push(bookA, bookB, bookC);*/
 populateTable(myLibrary ,table);
