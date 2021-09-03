@@ -1,5 +1,6 @@
 let myLibrary = [];
 const table = document.querySelector('.books');
+const addForm = document.forms['addBookForm'];
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -24,6 +25,7 @@ function populateTable(books = [], table) {
     }
 
     books.map((book, i) => {
+        // add row into table
         let row = table.insertRow(i+1);
         let title = row.insertCell(0);
         let author = row.insertCell(1);
@@ -31,10 +33,11 @@ function populateTable(books = [], table) {
         let read = row.insertCell(3);
         let removeBook = row.insertCell(4);
 
+        // populate cells
         title.innerHTML = book.title;
         author.innerHTML = book.author;
         pages.innerHTML = book.pages;
-        read.innerHTML = book.read;
+        read.innerHTML = book.info()[3];
         removeBook.innerHTML = `<button [data-index]="${i}">Remove Book</button>`;
 
         removeBook.addEventListener('click', (e) => {
@@ -57,14 +60,11 @@ function addBook(e) {
     
     myLibrary.push(book);
     populateTable(myLibrary, table);
+    addForm.reset();
 }
 
 //Add book
-const addForm = document.forms['addBookForm'];
 addForm.addEventListener('submit', addBook);
-
-const removeBookButtons = document.querySelectorAll('[data-index]');
-console.log(removeBookButtons);
 
 //dummy list of books
 let bookA = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
