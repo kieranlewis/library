@@ -19,6 +19,11 @@ Book.prototype.info = function() {
     return [this.title, this.author, this.pages, readString];
 }
 
+Book.prototype.toggleStatus = function() {
+    this.read = !this.read;
+    populateTable(myLibrary, table);
+}
+
 function populateTable(books = [], table) {
     while(table.rows.length > 1) {
         table.deleteRow(1);
@@ -47,11 +52,7 @@ function populateTable(books = [], table) {
             populateTable(myLibrary, table);
         });
 
-        read.addEventListener('click', (e) => {
-            console.log(book.read);
-            book.read = !book.read;
-            populateTable(myLibrary, table);
-        });
+        read.addEventListener('click', () => { book.toggleStatus(); });
     })
 }
 
