@@ -37,7 +37,7 @@ function populateTable(books = [], table) {
         title.innerHTML = book.title;
         author.innerHTML = book.author;
         pages.innerHTML = book.pages;
-        read.innerHTML = book.info()[3];
+        read.innerHTML = `<button>${book.info()[3]}</button>`;
         removeBook.innerHTML = `<button [data-index]="${i}">Remove Book</button>`;
 
         removeBook.addEventListener('click', (e) => {
@@ -46,8 +46,15 @@ function populateTable(books = [], table) {
             myLibrary.splice(index, 1);
             populateTable(myLibrary, table);
         });
+
+        read.addEventListener('click', (e) => {
+            console.log(book.read);
+            book.read = !book.read;
+            populateTable(myLibrary, table);
+        });
     })
 }
+
 
 function addBook(e) {
     e.preventDefault();
