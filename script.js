@@ -43,8 +43,8 @@ function populateTable(books = [], table) {
         title.innerHTML = book.title;
         author.innerHTML = book.author;
         pages.innerHTML = book.pages;
-        read.innerHTML = `<button>${book.read}</button>`
-        removeBook.innerHTML = `<button [data-index]="${i}">Remove Book</button>`;
+        read.innerHTML = `<button id="btn-read">${book.read}</button>`
+        removeBook.innerHTML = `<button [data-index]="${i}">Delete</button>`;
         
         removeBook.addEventListener('click', (e) => {
             let index = e.target.getAttribute('[data-index]');
