@@ -25,6 +25,13 @@ Book.prototype.toggleStatus = function() {
     localStorage.setItem('books', JSON.stringify(myLibrary));
 }
 
+function deleteBook(e) {
+    let index = e.target.getAttribute('[data-index]');
+    myLibrary.splice(index, 1);
+    populateTable(myLibrary, table);
+    localStorage.setItem('books', JSON.stringify(myLibrary));
+}
+
 function populateTable(books = [], table) {
     while(table.rows.length > 1) {
         table.deleteRow(1);
@@ -46,15 +53,10 @@ function populateTable(books = [], table) {
         read.innerHTML = `<button id="btn-read">${book.read}</button>`
         removeBook.innerHTML = `<button [data-index]="${i}">Delete</button>`;
         
-        removeBook.addEventListener('click', (e) => {
-            let index = e.target.getAttribute('[data-index]');
-            myLibrary.splice(index, 1);
-            populateTable(myLibrary, table);
-            localStorage.setItem('books', JSON.stringify(myLibrary));
-        });
+        removeBook.addEventListener('click', deleteBook);
 
         read.addEventListener('click', () => { book.toggleStatus(); });
-    })
+    });
 }
 
 function addBook(e) {
