@@ -17,7 +17,6 @@ h1 {
     width: 90%;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
     grid-template-columns: 1fr 1fr;
 }
 
@@ -25,6 +24,26 @@ form {
     color: #F0EFF4;
     margin-bottom: 20px;
     max-width: 1000px;
+}
+
+.text-input input {
+    width: 90%;
+}
+
+.number-input input {
+    width: 90%;
+}
+
+.radio-buttons input {
+    margin-right: 30px;
+}
+
+.radio-buttons button {
+    margin-left: 80px;
+}
+
+form div {
+    padding-bottom: 5px;
 }
 
 label {
