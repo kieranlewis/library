@@ -1,3 +1,17 @@
-li {
-    list-style-type: none;
+body {
+    font-family: 'Kaisei Tokumin', serif;
+    background-color: #832161;
+}
+
+h1 {
+    text-align: center;
+    color: #F0EFF4;
+} 
+
+form {
+    color: #F0EFF4;
+}
+
+table {
+    color: #F0EFF4;
 }

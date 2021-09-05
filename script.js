@@ -59,11 +59,9 @@ function populateTable(books = [], table) {
 
 function addBook(e) {
     e.preventDefault();
-    console.log(document.forms["addBookForm"]);
     const title = addForm.querySelector('#title').value;
     const author = addForm.querySelector('#author').value;
     const pages = addForm.querySelector('#pages').value;
-    //const read = addForm.querySelector('name="read"').value;
     const read = checkRadioSelected();
 
     const book = new Book(title, author, pages, read);
@@ -98,7 +96,6 @@ myLibrary.push(bookA, bookB, bookC);*/
 // the way local storage works is it does not keep functions so have to replace each item in the array with a book version of itself
 myLibrary.forEach(object => {
     let index = myLibrary.indexOf(object);
-    console.log(object);
     const book = new Book(object.title, object.author, object.pages, object.read);
     myLibrary.splice(index, 1, book);
 }); 
