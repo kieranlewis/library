@@ -2,27 +2,26 @@ let myLibrary = JSON.parse(localStorage.getItem('books')) || [];
 const table = document.querySelector('.books');
 const addForm = document.forms['addBookForm'];
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
-
-Book.prototype.info = function() {
-    let readString;
-    if(this.read) {
-        readString = 'read';
-    } else {
-        readString = 'not read';
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
-    return [this.title, this.author, this.pages, readString];
-}
 
-Book.prototype.toggleStatus = function() {
-    this.read = !this.read;
-    populateTable(myLibrary, table);
-    localStorage.setItem('books', JSON.stringify(myLibrary));
+    info() {
+        let readString;
+        if(this.read) readString = 'read';
+        else readString = 'not read';
+
+        return [this.title, this.author, this.pages, readString];
+    }
+    toggleStatus() {
+        this.read = !this.read;
+        populateTable(myLibrary, table);
+        localStorage.setItem('books', JSON.stringify(myLibrary));
+    }
 }
 
 function deleteBook(e) {
@@ -95,7 +94,8 @@ let bookB = new Book('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling'
 let bookC = new Book('Pride & Prejudice', 'Jane Austen', 384, false);
 myLibrary.push(bookA, bookB, bookC);*/
 
-// the way local storage works is it does not keep functions so have to replace each item in the array with a book version of itself
+// the way local storage works is it does not keep functions so have to replace 
+// each item in the array with a book version of itself
 myLibrary.forEach(object => {
     let index = myLibrary.indexOf(object);
     const book = new Book(object.title, object.author, object.pages, object.read);
